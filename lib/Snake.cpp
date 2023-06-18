@@ -1,4 +1,4 @@
-#include "Snake.h"
+#include "..\include\Snake.h"
 #include<windows.h>
 
 #define WIDTH 50

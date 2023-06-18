@@ -4,10 +4,10 @@
 #include<iostream>
 #include<ctime>
 #include<conio.h>
-#include"loading_screen.h"
-#include"ending_screen.h"
-#include"Food.cpp"
-#include "Snake.cpp"
+#include"include\ending_screen.h"
+#include"include\loading_screen.h"
+#include"lib\Food.cpp"
+#include "lib\Snake.cpp"
 
 using namespace std;
 #define WIDTH 50

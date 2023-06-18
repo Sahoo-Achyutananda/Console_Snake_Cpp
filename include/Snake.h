@@ -20,6 +20,19 @@ class Snake{
         char direction;
         std::vector<COORD> body;
     public:
+        void setPos(int x, int y){
+            this->pos.X = x;
+            this->pos.Y = y;
+        }
+        void setLen(int l){
+            this->len = l;
+        }
+        void setDir(char d){
+            this->direction = d;
+        }
+        void pushPos(COORD p){
+            this->body.push_back(p);
+        }
         Snake(COORD pos, int vel); // constructor
         void change_dir(char direction);
         void move_snake(int delay);
@@ -29,7 +42,10 @@ class Snake{
         bool collided();
         bool bitten();
         std::vector<COORD> get_body();
-
+        void clear_body(){
+            this->body.clear();
+        }
+        ~Snake(){}
 };
 
 #endif
