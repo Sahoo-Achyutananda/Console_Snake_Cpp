@@ -4,10 +4,10 @@
 #include<iostream>
 #include<ctime>
 #include<conio.h>
-#include"include\ending_screen.h"
-#include"include\loading_screen.h"
-#include"lib\Food.cpp"
-#include "lib\Snake.cpp"
+#include"..\include\ending_screen.h"
+#include"..\include\loading_screen.h"
+#include"..\lib\Food.cpp"
+#include "..\lib\Snake.cpp"
 
 using namespace std;
 #define WIDTH 50
@@ -15,7 +15,7 @@ using namespace std;
 
 // creating the snake object and assigning it to the centre of the board
 Snake snake({WIDTH/2,HEIGHT/2}, 1);
-
+vector<COORD> snake_body = snake.get_body();
 // creating the food object
 Food food;
 
@@ -27,7 +27,7 @@ void board()
     COORD snake_pos = snake.get_pos();
     COORD food_pos = food.get_pos();
 
-    vector<COORD> snake_body = snake.get_body();
+    snake_body = snake.get_body();
 
     cout << "SCORE : " << score << "\n\n";
 
@@ -63,8 +63,7 @@ void board()
     }
 }
 
-int main(){
-    load_screen();
+void startGame(){
     system("cls");
     score = 0;    
     bool game_over = false;
@@ -93,6 +92,7 @@ int main(){
 
         if(snake.collided() || snake.bitten()){
             game_over = true;
+            break;
         }
 
         if(snake.eaten(food.get_pos())){ // if the snake has eaten the food
@@ -106,16 +106,24 @@ int main(){
         SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),{0,0}); // moves the cursor to the start of the console (0,0)
 
     }
-    if(game_over == true){
+}
+
+int main(){
+    load_screen();
+    while(1){
+        startGame();
         end_screen(score);
-        char x = getch();
-        switch(x){
-            case 1 : 
-                system("./a.exe");
-                break;
-            case 2 :
-                break;
+        if(getch() == '1'){
+            snake.setPos(WIDTH/2,HEIGHT/2);
+            snake.clear_body();
+            snake.setLen(1);
+            //snake.setDir('n');
+            snake.pushPos({WIDTH/2,HEIGHT/2});
+            load_screen();
+        }
+        else{
+            break;
         }
     }
-
+    
 }
